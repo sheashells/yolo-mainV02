@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#14251f">
+  <title>Sign in | Padilla Property Portal</title>
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      color: #202b26;
+      background: #f5f6f2;
+      font-synthesis: none;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      min-width: 320px;
+      min-height: 100vh;
+      margin: 0;
+      display: grid;
+      place-items: center;
+      padding: 32px;
+      position: relative;
+      isolation: isolate;
+      overflow-x: hidden;
+      background: #172a22;
+    }
+
+    body::before {
+      position: fixed;
+      z-index: -1;
+      inset: -24px;
+      content: "";
+      background:
+        linear-gradient(115deg, rgb(12 27 21 / 63%), rgb(20 37 31 / 34%) 54%, rgb(16 29 24 / 45%)),
+        url("bg.jpg") center / cover;
+      transform: translate3d(var(--parallax-x, 0px), var(--parallax-y, 0px), 0) scale(1.04);
+      will-change: transform;
+    }
+
+    .login-shell {
+      width: min(1120px, 100%);
+      min-height: 680px;
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      overflow: hidden;
+      background: rgb(255 255 255 / 89%);
+      border: 1px solid rgb(255 255 255 / 52%);
+      border-radius: 24px;
+      box-shadow: 0 28px 90px rgb(8 20 15 / 30%);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+    .brand-panel {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 680px;
+      overflow: hidden;
+      padding: 42px 48px 36px;
+      color: #f7f8f4;
+      background:
+        linear-gradient(0deg, rgb(10 22 17 / 84%), rgb(14 31 24 / 44%) 58%, rgb(13 26 21 / 31%)),
+        linear-gradient(90deg, rgb(15 32 25 / 48%), rgb(15 32 25 / 12%)),
+        url("bg.jpg");
+      background-position:
+        center,
+        center,
+        calc(50% + var(--parallax-x, 0px)) calc(50% + var(--parallax-y, 0px));
+      background-size: auto, auto, 112% 112%;
+    }
+
+    .brand-panel::after {
+      position: absolute;
+      z-index: 0;
+      content: "";
+      pointer-events: none;
+    }
+
+    .brand-panel::after {
+      right: 0;
+      bottom: 0;
+      left: 0;
+      height: 42%;
+      background: linear-gradient(transparent, rgb(9 21 16 / 26%));
+    }
+
+    .brand-header,
+    .brand-copy,
+    .brand-footer { position: relative; z-index: 1; }
+
+    .brand-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 15px;
+      font-weight: 650;
+      letter-spacing: 0.01em;
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      color: #183025;
+      background: #d7e5d4;
+      border-radius: 12px;
+    }
+
+    .brand-copy { max-width: 435px; margin-top: auto; padding: 56px 0 38px; }
+
+    .eyebrow {
+      margin: 0 0 18px;
+      color: #c3d8bf;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .brand-copy h1 {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(42px, 5vw, 62px);
+      font-weight: 400;
+      letter-spacing: -0.045em;
+      line-height: 1.06;
+    }
+
+    .brand-copy h1 span { color: #c3d8bf; font-style: italic; }
+
+    .brand-copy > p:last-child {
+      max-width: 360px;
+      margin: 22px 0 0;
+      color: #c5d0c8;
+      font-size: 15px;
+      line-height: 1.75;
+    }
+
+    .property-card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      width: fit-content;
+      margin-top: 30px;
+      padding: 12px 16px 12px 12px;
+      background: rgb(255 255 255 / 9%);
+      border: 1px solid rgb(255 255 255 / 13%);
+      border-radius: 14px;
+      backdrop-filter: blur(12px);
+    }
+
+    .property-icon {
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      color: #d7e5d4;
+      background: rgb(215 229 212 / 12%);
+      border-radius: 10px;
+    }
+
+    .property-card strong,
+    .property-card span { display: block; }
+
+    .property-card strong { font-size: 12px; font-weight: 600; }
+    .property-card span { margin-top: 4px; color: #c5d0c8; font-size: 11px; }
+
+    .brand-footer {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #b8c5bc;
+      font-size: 11px;
+    }
+
+    .brand-footer svg { color: #c3d8bf; }
+
+    .form-panel {
+      display: grid;
+      place-items: center;
+      padding: 56px;
+      background: rgb(255 255 255 / 91%);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+    .form-content { width: min(100%, 370px); }
+
+    .mobile-brand {
+      display: none;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 44px;
+      color: #20372b;
+      font-size: 14px;
+      font-weight: 650;
+    }
+
+    .mobile-brand .brand-mark { width: 34px; height: 34px; }
+
+    .form-heading { margin-bottom: 34px; }
+
+    .form-heading .eyebrow {
+      margin-bottom: 12px;
+      color: #66816b;
+      font-size: 10px;
+    }
+
+    .form-heading h2 {
+      margin: 0;
+      color: #202b26;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 38px;
+      font-weight: 400;
+      letter-spacing: -0.035em;
+    }
+
+    .form-heading p:last-child {
+      margin: 11px 0 0;
+      color: #78817b;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .field { margin-bottom: 20px; }
+
+    .field label {
+      display: block;
+      margin-bottom: 9px;
+      color: #35413a;
+      font-size: 12px;
+      font-weight: 650;
+    }
+
+    .input-wrap { position: relative; }
+
+    .input-wrap > svg {
+      position: absolute;
+      top: 50%;
+      left: 15px;
+      width: 18px;
+      height: 18px;
+      color: #849087;
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+
+    .field input {
+      width: 100%;
+      height: 50px;
+      padding: 0 46px;
+      color: #26332b;
+      background: #fff;
+      border: 1px solid #dfe4de;
+      border-radius: 10px;
+      outline: none;
+      font: inherit;
+      font-size: 13px;
+      transition: border-color 160ms ease, box-shadow 160ms ease;
+    }
+
+    .field input::placeholder { color: #a0a9a2; }
+
+    .field input:focus {
+      border-color: #5e8067;
+      box-shadow: 0 0 0 3px rgb(94 128 103 / 13%);
+    }
+
+    .password-toggle {
+      position: absolute;
+      top: 50%;
+      right: 12px;
+      display: grid;
+      place-items: center;
+      width: 30px;
+      height: 30px;
+      padding: 0;
+      color: #78847b;
+      background: transparent;
+      border: 0;
+      border-radius: 6px;
+      cursor: pointer;
+      transform: translateY(-50%);
+    }
+
+    .password-toggle:hover { color: #263d30; background: #f2f5f1; }
+    .password-toggle:focus-visible { outline: 2px solid #5e8067; outline-offset: 2px; }
+
+    .form-options {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin: 1px 0 25px;
+      font-size: 12px;
+    }
+
+    .remember-option {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #68736c;
+      cursor: pointer;
+    }
+
+    .remember-option input {
+      width: 15px;
+      height: 15px;
+      margin: 0;
+      accent-color: #315d43;
+    }
+
+    .text-link {
+      color: #315d43;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .text-link:hover { text-decoration: underline; }
+
+    .submit-button {
+      width: 100%;
+      min-height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      color: #fff;
+      background: #244d36;
+      border: 1px solid #244d36;
+      border-radius: 10px;
+      cursor: pointer;
+      font: inherit;
+      font-size: 13px;
+      font-weight: 650;
+      transition: background 160ms ease, transform 160ms ease;
+    }
+
+    .submit-button:hover { background: #1a3d2a; }
+    .submit-button:active { transform: translateY(1px); }
+    .submit-button:focus-visible { outline: 3px solid rgb(49 93 67 / 30%); outline-offset: 3px; }
+    .submit-button:disabled { cursor: wait; opacity: 0.75; }
+
+    .status-message {
+      min-height: 20px;
+      margin: 12px 0 0;
+      color: #a43e32;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .status-message:empty { visibility: hidden; }
+    .status-message[data-state="success"] { color: #315d43; }
+
+    .form-divider {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin: 22px 0;
+      color: #a0a8a2;
+      font-size: 10px;
+    }
+
+    .form-divider::before,
+    .form-divider::after {
+      height: 1px;
+      flex: 1;
+      content: "";
+      background: #edf0ec;
+    }
+
+    .ai-note {
+      display: flex;
+      align-items: flex-start;
+      gap: 11px;
+      padding: 14px;
+      color: #526058;
+      background: #f5f7f3;
+      border: 1px solid #e9eee7;
+      border-radius: 11px;
+    }
+
+    .ai-note svg { flex: 0 0 auto; margin-top: 1px; color: #52735b; }
+    .ai-note strong { display: block; margin-bottom: 4px; color: #35473b; font-size: 11px; }
+    .ai-note p { margin: 0; font-size: 11px; line-height: 1.55; }
+
+    .form-footer {
+      margin: 30px 0 0;
+      color: #9aa39c;
+      font-size: 10px;
+      text-align: center;
+    }
+
+    @media (max-width: 860px) {
+      body { padding: 20px; }
+      .login-shell { grid-template-columns: 0.9fr 1.1fr; }
+      .brand-panel { padding: 34px 32px 30px; }
+      .form-panel { padding: 42px 34px; }
+      .brand-copy h1 { font-size: 48px; }
+    }
+
+    @media (max-width: 640px) {
+      body { display: block; padding: 0; }
+      .login-shell {
+        width: 100%;
+        min-height: 100vh;
+        display: block;
+        border: 0;
+        border-radius: 0;
+        box-shadow: none;
+        background: transparent;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+      }
+      .brand-panel { display: none; }
+      .form-panel {
+        min-height: 100vh;
+        padding: 34px 26px;
+        background: rgb(255 255 255 / 94%);
+      }
+      .mobile-brand { display: flex; }
+      .form-heading h2 { font-size: 35px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; }
+      body::before { transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="login-shell">
+    <section class="brand-panel" aria-labelledby="brand-title">
+      <div class="brand-header">
+        <span class="brand-mark" aria-hidden="true">
+          <svg width="21" height="21" viewBox="0 0 24 24" fill="none">
+            <path d="M3.5 10.4 12 3.8l8.5 6.6M5.7 9.3v10.9h12.6V9.3M9.5 20.2v-6.8h5v6.8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span>Padilla's Haven <span style="font-weight: 400; opacity: .8;">Property Portal</span></span>
+      </div>
+
+      <div class="brand-copy">
+        <p class="eyebrow">A better way to manage property</p>
+        <h1 id="brand-title">Every property.<br><span>One place.</span></h1>
+        <p>From the first application to the next lease, keep your properties, people, and portfolio moving forward.</p>
+        <div class="property-card">
+          <span class="property-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M4 20V9l8-5 8 5v11M8 20v-6h8v6M2.5 20h19" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <span><strong>Your portfolio, in good hands</strong><span>Properties, leases &amp; maintenance</span></span>
+        </div>
+      </div>
+
+      <div class="brand-footer">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M12 3 5 6v5c0 4.7 3 8.1 7 10 4-1.9 7-5.3 7-10V6l-7-3Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+          <path d="m9 12 2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        A secure workspace for your property team
+      </div>
+    </section>
+
+    <section class="form-panel" aria-labelledby="login-title">
+      <div class="form-content">
+        <div class="mobile-brand">
+          <span class="brand-mark" aria-hidden="true">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none">
+              <path d="M3.5 10.4 12 3.8l8.5 6.6M5.7 9.3v10.9h12.6V9.3M9.5 20.2v-6.8h5v6.8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <span>Haven Property Portal</span>
+        </div>
+
+        <header class="form-heading">
+          <p class="eyebrow">Welcome back</p>
+          <h2 id="login-title">Sign in to Padilla's haven</h2>
+          <p>Access your property workspace and pick up where you left off.</p>
+        </header>
+
+        <form id="loginForm">
+          <div class="field">
+            <label for="email">Work email</label>
+            <div class="input-wrap">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <rect x="3.5" y="5" width="17" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/>
+                <path d="m4.5 7 7.5 6 7.5-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <input type="email" id="email" name="email" placeholder="you@company.com" autocomplete="username" required>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="password">Password</label>
+            <div class="input-wrap">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <rect x="4.5" y="10" width="15" height="11" rx="2" stroke="currentColor" stroke-width="1.6"/>
+                <path d="M8 10V7a4 4 0 0 1 8 0v3m-4 5v2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+              </svg>
+              <input type="password" id="password" name="password" placeholder="Enter your password" autocomplete="current-password" required>
+              <button class="password-toggle" type="button" id="passwordToggle" aria-label="Show password" aria-pressed="false">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M2.5 12s3.4-6 9.5-6 9.5 6 9.5 6-3.4 6-9.5 6-9.5-6-9.5-6Z" stroke="currentColor" stroke-width="1.6"/>
+                  <circle cx="12" cy="12" r="2.5" stroke="currentColor" stroke-width="1.6"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="form-options">
+            <label class="remember-option"><input type="checkbox" name="remember"> Keep me signed in</label>
+            <a class="text-link" href="mailto:support@haven.example?subject=Password%20help">Forgot password?</a>
+          </div>
+
+          <button class="submit-button" id="submitButton" type="submit">
+            Sign in
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <p class="status-message" id="statusMessage" role="status" aria-live="polite"></p>
+        </form>
+
+        <div class="form-divider">PROPERTY INTELLIGENCE</div>
+        <aside class="ai-note" aria-label="AI property valuation feature">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M12 3v2m0 14v2M3 12h2m14 0h2M5.6 5.6 7 7m10 10 1.4 1.4m0-12.8L17 7M7 17l-1.4 1.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+            <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.6"/>
+            <path d="m10.5 12 1 1 2-2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <div>
+            <strong>Smarter property decisions</strong>
+            <p>Explore AI-assisted valuations informed by historical records and market trends.</p>
+          </div>
+        </aside>
+        <p class="form-footer">Secure access for property managers, agents, and teams.</p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const loginForm = document.getElementById("loginForm");
+    const passwordInput = document.getElementById("password");
+    const passwordToggle = document.getElementById("passwordToggle");
+    const submitButton = document.getElementById("submitButton");
+    const statusMessage = document.getElementById("statusMessage");
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    if (!prefersReducedMotion.matches) {
+      let targetX = 0;
+      let targetY = 0;
+      let currentX = 0;
+      let currentY = 0;
+      let animationFrame = 0;
+
+      const animateBackground = () => {
+        currentX += (targetX - currentX) * 0.12;
+        currentY += (targetY - currentY) * 0.12;
+        document.body.style.setProperty("--parallax-x", `${currentX.toFixed(2)}px`);
+        document.body.style.setProperty("--parallax-y", `${currentY.toFixed(2)}px`);
+
+        if (Math.abs(targetX - currentX) > 0.08 || Math.abs(targetY - currentY) > 0.08) {
+          animationFrame = window.requestAnimationFrame(animateBackground);
+        } else {
+          currentX = targetX;
+          currentY = targetY;
+          document.body.style.setProperty("--parallax-x", `${currentX.toFixed(2)}px`);
+          document.body.style.setProperty("--parallax-y", `${currentY.toFixed(2)}px`);
+          animationFrame = 0;
+        }
+      };
+
+      const scheduleBackground = () => {
+        if (!animationFrame) animationFrame = window.requestAnimationFrame(animateBackground);
+      };
+
+      window.addEventListener("pointermove", (event) => {
+        targetX = (0.5 - event.clientX / window.innerWidth) * 24;
+        targetY = (0.5 - event.clientY / window.innerHeight) * 18;
+        scheduleBackground();
+      }, { passive: true });
+
+      const resetBackground = () => {
+        targetX = 0;
+        targetY = 0;
+        scheduleBackground();
+      };
+
+      window.addEventListener("pointerup", resetBackground, { passive: true });
+      window.addEventListener("pointercancel", resetBackground, { passive: true });
+      window.addEventListener("blur", resetBackground);
+    }
+
+    passwordToggle.addEventListener("click", () => {
+      const showPassword = passwordInput.type === "password";
+      passwordInput.type = showPassword ? "text" : "password";
+      passwordToggle.setAttribute("aria-label", showPassword ? "Hide password" : "Show password");
+      passwordToggle.setAttribute("aria-pressed", String(showPassword));
+    });
+
+    loginForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      statusMessage.textContent = "";
+      statusMessage.removeAttribute("data-state");
+      submitButton.disabled = true;
+      submitButton.textContent = "Signing in...";
+
+      try {
+        const email = document.getElementById("email").value;
+        const password = passwordInput.value;
+        const response = await fetch("/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password })
+        });
+
+        let data;
+        try {
+          data = await response.json();
+        } catch (error) {
+          throw new Error("We couldn't read the sign-in response. Please try again.");
+        }
+
+        if (!response.ok) {
+          throw new Error(data.message || data.error || "Unable to sign in. Check your details and try again.");
+        }
+
+        if (!data.token) {
+          throw new Error(data.message || "Unable to sign in. Check your details and try again.");
+        }
+
+        localStorage.setItem("token", data.token);
+        statusMessage.dataset.state = "success";
+        statusMessage.textContent = "Signed in successfully.";
+      } catch (error) {
+        statusMessage.textContent = error.message || "Unable to connect. Please try again.";
+      } finally {
+        submitButton.disabled = false;
+        submitButton.innerHTML = 'Sign in <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+      }
+    });
+  </script>
+</body>
+</html>

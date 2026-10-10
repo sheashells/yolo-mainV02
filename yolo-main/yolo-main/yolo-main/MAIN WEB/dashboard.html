@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#14251f">
+  <title>Property Portal | SIERRA HAVEN</title>
+  <link rel="stylesheet" href="Style.css">
+</head>
+<body>
+  <main class="portal-shell">
+    <header class="portal-header">
+      <div class="brand-header">
+        <span class="brand-mark" aria-hidden="true">
+          <svg width="21" height="21" viewBox="0 0 24 24" fill="none">
+            <path d="M3.5 10.4 12 3.8l8.5 6.6M5.7 9.3v10.9h12.6V9.3M9.5 20.2v-6.8h5v6.8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span>SIERRA HAVEN <span style="font-weight: 400; opacity: .8;">Property Portal</span></span>
+      </div>
+      <div class="portal-actions">
+        <a class="submit-button portal-sign-in" href="index.html">Home</a>
+        <a class="submit-button portal-sign-in" href="valuation.html">AI Valuation</a>
+        <button class="submit-button" onclick="alert('Creating new lease...')">
+          + New Lease
+        </button>
+        <div class="settings-container">
+          <button class="submit-button settings-toggle" id="settingsToggle" type="button"
+                  aria-expanded="false" aria-controls="settingsPanel">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Z" stroke="currentColor" stroke-width="1.7"/>
+              <path d="m19.4 15 .1.1a1.7 1.7 0 0 1-2.4 2.4l-.1-.1a1.7 1.7 0 0 0-2.9 1.2v.2a1.7 1.7 0 0 1-3.4 0v-.2a1.7 1.7 0 0 0-2.9-1.2l-.1.1a1.7 1.7 0 0 1-2.4-2.4l.1-.1a1.7 1.7 0 0 0-1.2-2.9H4a1.7 1.7 0 0 1 0-3.4h.2a1.7 1.7 0 0 0 1.2-2.9l-.1-.1a1.7 1.7 0 0 1 2.4-2.4l.1.1a1.7 1.7 0 0 0 2.9-1.2V2a1.7 1.7 0 0 1 3.4 0v.2a1.7 1.7 0 0 0 2.9 1.2l.1-.1a1.7 1.7 0 0 1 2.4 2.4l-.1.1a1.7 1.7 0 0 0 1.2 2.9h.2a1.7 1.7 0 0 1 0 3.4h-.2a1.7 1.7 0 0 0-1.2 2.9Z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Settings
+          </button>
+
+          <section class="settings-panel" id="settingsPanel" aria-label="Settings" hidden>
+            <nav class="settings-nav" aria-label="Settings sections">
+              <button class="settings-nav-item is-active" type="button" data-settings-view="account" aria-current="page">Account info</button>
+              <button class="settings-nav-item" type="button" data-settings-view="history">History</button>
+              <button class="settings-nav-item" type="button" data-settings-view="contact">Contact info</button>
+              <button class="settings-nav-item" type="button" data-settings-view="help">Help</button>
+            </nav>
+
+            <div class="settings-content">
+              <section class="settings-view" data-settings-content="account">
+                <h2>Account info</h2>
+                <p class="settings-muted">Demo account</p>
+                <dl class="settings-details">
+                  <div><dt>Name</dt><dd>Not set</dd></div>
+                  <div><dt>Email</dt><dd>Not set</dd></div>
+                </dl>
+                <p class="settings-note">Account details are not connected to sign-up yet.</p>
+              </section>
+
+              <section class="settings-view" data-settings-content="history" hidden>
+                <h2>History</h2>
+                <p class="settings-muted">Recent portal activity</p>
+                <p class="settings-note">No activity has been recorded in this demo.</p>
+              </section>
+
+              <section class="settings-view" data-settings-content="contact" hidden>
+                <h2>Contact info</h2>
+                <p class="settings-muted">SIERRA HAVEN support</p>
+                <p><a href="mailto:support@haven.example">support@haven.example</a></p>
+              </section>
+
+              <section class="settings-view" data-settings-content="help" hidden>
+                <h2>Help</h2>
+                <p class="settings-note">Browse available properties from the dashboard. For assistance, contact the support team.</p>
+                <a href="mailto:support@haven.example">Get help</a>
+              </section>
+
+              <div class="theme-setting">
+                <div>
+                  <span class="theme-setting-title">Appearance</span>
+                  <span class="settings-muted" id="themeDescription">Light theme</span>
+                </div>
+                <label class="theme-switch" for="themeToggle">
+                  <span class="visually-hidden">Switch between light and dark theme</span>
+                  <input type="checkbox" id="themeToggle" role="switch" aria-label="Dark theme">
+                  <span class="theme-slider" aria-hidden="true"></span>
+                </label>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </header>
+
+    <div class="portal-content">
+      <div class="portal-heading">
+        <p class="eyebrow">Portfolio Overview</p>
+        <h2>Available Properties & Leases</h2>
+        <p>Scroll down to load the latest additions to the property catalog.</p>
+      </div>
+
+      <!-- Property Grid -->
+      <div class="property-grid">
+        
+        <!-- Lazy Loaded Card 1 -->
+        <article class="property-card-lg lazy-element">
+          <div class="card-image" style="background-image: url('../LOGIN%20PANEL/bg.jpg');"></div>
+          <div class="card-details">
+            <p class="eyebrow">For Lease</p>
+            <h3>Luxury Apartment - Unit 4A</h3>
+            <p>2 Beds • 2 Baths • 1,200 sqft</p>
+            <div class="card-actions">
+              <button class="action-btn" onclick="alert('Viewing Unit 4A details...')">View Details</button>
+              <button class="action-btn secondary" onclick="alert('Contacting Agent...')">Contact Agent</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Lazy Loaded Card 2 -->
+        <article class="property-card-lg lazy-element">
+          <div class="card-image" style="background-image: url('../LOGIN%20PANEL/bg.jpg');"></div>
+          <div class="card-details">
+            <p class="eyebrow">Available Now</p>
+            <h3>Downtown Studio</h3>
+            <p>1 Bed • 1 Bath • 750 sqft</p>
+            <div class="card-actions">
+              <button class="action-btn" onclick="alert('Viewing Downtown Studio details...')">View Details</button>
+              <button class="action-btn secondary" onclick="alert('Contacting Agent...')">Contact Agent</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Lazy Loaded Card 3 -->
+        <article class="property-card-lg lazy-element">
+          <div class="card-image" style="background-image: url('../LOGIN%20PANEL/bg.jpg');"></div>
+          <div class="card-details">
+            <p class="eyebrow">Under Maintenance</p>
+            <h3>Suburban Family Home</h3>
+            <p>4 Beds • 3 Baths • 2,400 sqft</p>
+            <div class="card-actions">
+              <button class="action-btn" onclick="alert('Viewing Family Home details...')">View Details</button>
+              <button class="action-btn secondary" onclick="alert('Contacting Agent...')">Contact Agent</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Lazy Loaded Card 4 -->
+        <article class="property-card-lg lazy-element">
+          <div class="card-image" style="background-image: url('../LOGIN%20PANEL/bg.jpg');"></div>
+          <div class="card-details">
+            <p class="eyebrow">For Lease</p>
+            <h3>Penthouse Suite</h3>
+            <p>3 Beds • 3.5 Baths • 3,100 sqft</p>
+            <div class="card-actions">
+              <button class="action-btn" onclick="alert('Viewing Penthouse details...')">View Details</button>
+              <button class="action-btn secondary" onclick="alert('Contacting Agent...')">Contact Agent</button>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Lazy Loading implementation for scroll reveals
+    document.addEventListener("DOMContentLoaded", () => {
+      const settingsToggle = document.getElementById("settingsToggle");
+      const settingsPanel = document.getElementById("settingsPanel");
+      const themeToggle = document.getElementById("themeToggle");
+      const themeDescription = document.getElementById("themeDescription");
+
+      settingsToggle.addEventListener("click", () => {
+        const isOpen = settingsToggle.getAttribute("aria-expanded") === "true";
+        settingsToggle.setAttribute("aria-expanded", String(!isOpen));
+        settingsPanel.hidden = isOpen;
+      });
+
+      document.querySelectorAll("[data-settings-view]").forEach((button) => {
+        button.addEventListener("click", () => {
+          const selectedView = button.dataset.settingsView;
+          document.querySelectorAll("[data-settings-view]").forEach((item) => {
+            const isSelected = item === button;
+            item.classList.toggle("is-active", isSelected);
+            if (isSelected) {
+              item.setAttribute("aria-current", "page");
+            } else {
+              item.removeAttribute("aria-current");
+            }
+          });
+          document.querySelectorAll("[data-settings-content]").forEach((view) => {
+            view.hidden = view.dataset.settingsContent !== selectedView;
+          });
+        });
+      });
+
+      themeToggle.addEventListener("change", () => {
+        const theme = themeToggle.checked ? "dark" : "light";
+        document.body.dataset.theme = theme;
+        themeDescription.textContent = theme === "dark" ? "Dark theme" : "Light theme";
+        document.querySelector('meta[name="theme-color"]').content = theme === "dark" ? "#17211c" : "#14251f";
+      });
+
+      document.addEventListener("click", (event) => {
+        if (!event.target.closest(".settings-container")) {
+          settingsPanel.hidden = true;
+          settingsToggle.setAttribute("aria-expanded", "false");
+        }
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && !settingsPanel.hidden) {
+          settingsPanel.hidden = true;
+          settingsToggle.setAttribute("aria-expanded", "false");
+          settingsToggle.focus();
+        }
+      });
+
+      const lazyElements = document.querySelectorAll('.lazy-element');
+
+      const elementObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            // Add visible class when user scrolls to the item
+            entry.target.classList.add('visible');
+            // Stop observing once loaded
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        root: null,
+        threshold: 0.15, // Triggers when 15% of the item is in view
+        rootMargin: "0px 0px -50px 0px"
+      });
+
+      lazyElements.forEach(element => {
+        elementObserver.observe(element);
+      });
+    });
+  </script>
+</body>
+</html>
