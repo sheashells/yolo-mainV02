@@ -565,7 +565,7 @@
         <header class="form-heading">
           <p class="eyebrow">Welcome back</p>
           <h2 id="login-title">Sign in to SIERRA HAVEN</h2>
-          <p>Demo access: enter any valid email and password to open your property workspace.</p>
+          <p>Demo access: sign in to explore property listings and save buying inquiries to your dashboard.</p>
         </header>
 
         <div class="auth-choice" role="tablist" aria-label="Choose an account action">
@@ -678,8 +678,8 @@
       rememberOptions.hidden = signUp;
       formTitle.textContent = signUp ? "Create your account" : "Sign in to SIERRA HAVEN";
       formDescription.textContent = signUp
-        ? "Create a demo account to continue to your property workspace."
-        : "Demo access: enter any valid email and password to open your property workspace.";
+        ? "Create a demo account to explore property listings and save buying inquiries."
+        : "Demo access: sign in to explore property listings and save buying inquiries to your dashboard.";
       submitButton.innerHTML = signUp
         ? 'Sign up <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>'
         : 'Sign in <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>';
@@ -813,10 +813,13 @@
       submitButton.textContent = isSignUp ? "Creating account..." : "Signing in...";
       statusMessage.dataset.state = "success";
       statusMessage.textContent = isSignUp
-        ? "Demo account created. Opening the property portal..."
-        : "Demo sign-in successful. Opening the property portal...";
+        ? "Demo account created. Opening property listings..."
+        : "Demo sign-in successful. Opening property listings...";
       window.setTimeout(() => {
-        window.location.assign("../MAIN%20WEB/tenant-dashboard.html");
+        const propertyId = new URLSearchParams(window.location.search).get("property");
+        const propertyIds = ["grand-view", "riverside-lofts", "north-park-home", "coastal-villa", "midtown-suite", "oakwood-townhouse"];
+        const propertyQuery = propertyIds.includes(propertyId) ? `?property=${encodeURIComponent(propertyId)}` : "";
+        window.location.assign(`../MAIN%20WEB/dashboard.html${propertyQuery}`);
       }, 400);
     });
   </script>

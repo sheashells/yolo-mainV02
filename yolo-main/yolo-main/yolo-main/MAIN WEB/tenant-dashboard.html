@@ -143,7 +143,16 @@
     .overview-card .overview-link { display: inline-block; margin-top: 14px; color: var(--card-accent); font-size: 10px; font-weight: 800; }
     .overview-card:focus-visible { outline: 3px solid rgba(195,155,85,.45); outline-offset: 3px; }
     .overview-section-label { margin: 0 0 10px; color: var(--muted); font-size: 10px; font-weight: 800; letter-spacing: .11em; text-transform: uppercase; }
-    #lease, #payments, #maintenance, #activity { scroll-margin-top: 20px; }
+    .home-property-card { display: flex; align-items: center; justify-content: space-between; gap: 22px; margin-bottom: 24px; padding: 22px; }
+    .home-property-image { width: 180px; height: 118px; flex: 0 0 auto; border-radius: 11px; object-fit: cover; }
+    .home-property-copy { flex: 1; min-width: 0; }
+    .home-property-copy h2 { margin: 0 0 7px; color: var(--ink); font-size: 17px; }
+    .home-property-copy > p:last-child { margin: 0; color: var(--muted); font-size: 11px; line-height: 1.6; }
+    .home-property-actions { display: flex; flex: 0 0 auto; flex-wrap: wrap; gap: 8px; }
+    .home-property-actions .request-button { min-height: 39px; text-decoration: none; }
+    .home-property-card[hidden] { display: none; }
+    .content:not([data-view="overview"]) .home-property-card { display: none; }
+    #lease, #payments, #maintenance, #activity, #interests { scroll-margin-top: 20px; }
     .content[data-view="overview"] .dashboard-grid { display: none; }
     .content:not([data-view="overview"]) .overview-section-label { display: none; }
     .content:not([data-view="overview"]) .summary-grid { display: none; }
@@ -156,6 +165,7 @@
     .content[data-view="payments"] .dashboard-grid [data-page="payments"],
     .content[data-view="maintenance"] .dashboard-grid [data-page="maintenance"],
     .content[data-view="activity"] .dashboard-grid [data-page="activity"] { display: block; }
+    .content[data-view="interests"] .dashboard-grid [data-page="interests"] { display: block; }
     .summary-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
     .summary-label { color: var(--muted); font-size: 11px; font-weight: 650; }
     .summary-icon { display: grid; width: 32px; height: 32px; place-items: center; border-radius: 10px; color: var(--green); background: var(--green-light); font-size: 15px; }
@@ -184,7 +194,8 @@
     .paid-dot { width: 7px; height: 7px; border-radius: 50%; background: #a8dfb5; }
 
     .lease-property { display: flex; gap: 13px; align-items: center; padding-bottom: 16px; border-bottom: 1px solid var(--line); }
-    .property-thumb { display: grid; width: 74px; height: 65px; flex: 0 0 auto; place-items: center; overflow: hidden; border-radius: 11px; color: #f8f6ee; background: linear-gradient(145deg, #78977c, #334f41 62%, #c5ac7a); font-size: 22px; }
+    .property-thumb { width: 74px; height: 65px; flex: 0 0 auto; overflow: hidden; border-radius: 11px; }
+    .property-thumb img { width: 100%; height: 100%; object-fit: cover; }
     .property-copy h3 { margin: 0 0 5px; font-size: 12px; font-weight: 750; }
     .property-copy p { margin: 0; color: var(--muted); font-size: 10px; line-height: 1.5; }
     .lease-status { display: inline-flex; align-items: center; gap: 6px; margin-top: 7px; color: var(--green); font-size: 9px; font-weight: 750; }
@@ -284,6 +295,15 @@
     .request-detail { color: var(--muted); font-size: 11px; line-height: 1.6; }
     .request-row-button { padding: 6px 9px; border: 1px solid var(--line); border-radius: 7px; color: var(--green); background: #fff; font-size: 9px; font-weight: 750; cursor: pointer; }
     .request-row-button:hover { background: var(--green-light); }
+    .property-interest-list { display: grid; gap: 10px; }
+    .property-interest-row { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 14px; border: 1px solid var(--line); border-radius: 11px; background: #fff; }
+    .property-interest-image { width: 74px; height: 65px; flex: 0 0 auto; border-radius: 9px; object-fit: cover; }
+    .property-interest-details { flex: 1; min-width: 0; }
+    .property-interest-row strong { display: block; color: var(--ink); font-size: 12px; }
+    .property-interest-row p { margin: 5px 0 0; color: var(--muted); font-size: 10px; line-height: 1.5; }
+    .property-interest-status { flex: 0 0 auto; padding: 6px 9px; border-radius: 999px; color: #916616; background: #fbf4e7; font-size: 9px; font-weight: 750; }
+    .property-interest-empty { padding: 18px; border: 1px dashed #dce4de; border-radius: 11px; color: var(--muted); font-size: 11px; line-height: 1.6; text-align: center; }
+    .property-interest-empty a { color: var(--green); font-weight: 750; text-decoration: underline; }
 
     @media (max-width: 1100px) {
       .content { padding-right: 26px; padding-left: 26px; }
@@ -320,6 +340,10 @@
       .profile-name, .profile-role { display: none; }
       .content { padding: 24px 16px 36px; }
       .welcome-row { align-items: flex-start; flex-direction: column; gap: 8px; }
+      .home-property-card { align-items: flex-start; flex-direction: column; gap: 16px; padding: 17px; }
+      .home-property-image { width: 100%; height: 180px; }
+      .home-property-actions { width: 100%; }
+      .home-property-actions .request-button { flex: 1; }
       .summary-grid { gap: 10px; }
       .summary-card { min-height: 122px; padding: 14px; }
       .summary-value { font-size: 20px; }
@@ -357,6 +381,8 @@
         <a href="#overview" aria-current="page"><span class="nav-icon" aria-hidden="true">⌂</span><span>Overview</span></a>
         <a href="#lease"><span class="nav-icon" aria-hidden="true">▤</span><span>My lease</span></a>
         <a href="#payments"><span class="nav-icon" aria-hidden="true">₱</span><span>Payments</span></a>
+        <a href="#interests"><span class="nav-icon" aria-hidden="true">⌂</span><span>My interests</span></a>
+        <a href="dashboard.html"><span class="nav-icon" aria-hidden="true">⌕</span><span>Browse properties</span></a>
         <a href="#maintenance"><span class="nav-icon" aria-hidden="true">⌁</span><span>Maintenance</span></a>
         <a href="#activity"><span class="nav-icon" aria-hidden="true">◷</span><span>Activity</span></a>
       </nav>
@@ -396,6 +422,19 @@
           <p class="date-label">Sunday, October 11, 2026</p>
         </div>
 
+        <section class="panel home-property-card" id="homePropertyCard" aria-labelledby="homePropertyTitle">
+          <img class="home-property-image" src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&amp;fit=crop&amp;w=1200&amp;q=85" alt="Modern family house with a landscaped front yard" width="600" height="400" decoding="async">
+          <div class="home-property-copy">
+            <p class="eyebrow">Your current home</p>
+            <h2 id="homePropertyTitle">Modern Family House</h2>
+            <p>Oakwood Villas · Townhouse 12 · 2 bedrooms · 2 bathrooms<br>Active lease through September 30, 2027</p>
+          </div>
+          <div class="home-property-actions">
+            <a class="request-button" href="#lease">View lease details</a>
+            <a class="request-button" href="dashboard.html">Browse properties</a>
+          </div>
+        </section>
+
         <p class="overview-section-label">Your account at a glance · Select a card to open its section</p>
         <section class="summary-grid" aria-label="Tenant dashboard sections">
           <a class="summary-card overview-card overview-lease" href="#lease">
@@ -426,6 +465,15 @@
 
         <div class="dashboard-grid">
           <div class="primary-column">
+            <section class="panel" id="interests" data-page="interests" aria-labelledby="interestsTitle">
+              <div class="panel-heading">
+                <div><h2 id="interestsTitle">My property interests</h2><p>Buying inquiries saved from the property catalog</p></div>
+                <a class="text-link" href="dashboard.html">Browse listings</a>
+              </div>
+              <p class="inline-notice" id="interestStorageNotice" role="status" aria-live="polite" hidden></p>
+              <div class="property-interest-list" id="propertyInterestList"></div>
+            </section>
+
             <section class="panel rent-card" id="payments" data-page="payments" aria-labelledby="rent-title">
               <div class="rent-inner">
                 <div>
@@ -507,7 +555,9 @@
                 <span class="lease-status-badge" id="leaseStatusBadge" data-status="Active">Active</span>
               </div>
               <div class="lease-property">
-                <div class="property-thumb" aria-hidden="true">⌂</div>
+                <div class="property-thumb">
+                  <img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&amp;fit=crop&amp;w=600&amp;q=85" alt="Modern family house with a landscaped front yard" width="600" height="400" loading="lazy" decoding="async">
+                </div>
                 <div class="property-copy">
                   <h3>Modern Family House</h3>
                   <p>Oakwood Villas · Townhouse 12<br>2 bedroom · 2 bathroom</p>
@@ -683,10 +733,21 @@
     const requestList = document.getElementById('requestList');
     const activityList = document.getElementById('activityList');
     const storageKey = 'sierra-haven-tenant-demo';
+    const propertyInterestsStorageKey = 'sierra-haven-property-interests';
+    const propertyImages = {
+      'grand-view': 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=85',
+      'riverside-lofts': 'https://cdn.polyhaven.com/asset_img/primary/brown_photostudio_02.png?width=600',
+      'north-park-home': 'https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=600&q=85',
+      'coastal-villa': 'https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=600&q=85',
+      'midtown-suite': 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=85',
+      'oakwood-townhouse': 'https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=600&q=85'
+    };
     const dateFormatter = new Intl.DateTimeFormat('en', { month: 'short', day: 'numeric', year: 'numeric' });
     let savedRequests = [];
     let savedActivities = [];
     let savedNotifications = [];
+    let propertyInterests = [];
+    let propertyInterestsLoadError = false;
     let paymentMethods = [
       { id: 'method-bank-demo', type: 'Bank transfer', nickname: 'Oakwood Checking', lastFour: '1042', isDefault: true },
       { id: 'method-card-demo', type: 'Card', nickname: 'Visa', lastFour: '4821', isDefault: false }
@@ -744,6 +805,26 @@
     } catch (error) {
       storageAvailable = false;
       console.error('Could not load saved tenant dashboard data.', error);
+    }
+
+    try {
+      const savedInterests = localStorage.getItem(propertyInterestsStorageKey);
+      if (savedInterests !== null) {
+        const parsedInterests = JSON.parse(savedInterests);
+        if (!Array.isArray(parsedInterests)) throw new Error('Saved property inquiries are not in the expected format.');
+        propertyInterests = parsedInterests.filter((interest) =>
+          interest && typeof interest.id === 'string' &&
+          typeof interest.propertyId === 'string' &&
+          typeof interest.propertyName === 'string' &&
+          typeof interest.location === 'string' &&
+          typeof interest.price === 'string' &&
+          typeof interest.status === 'string' &&
+          typeof interest.date === 'string'
+        );
+      }
+    } catch (error) {
+      propertyInterestsLoadError = true;
+      console.error('Could not load saved property inquiries.', error);
     }
 
     function persistTenantData() {
@@ -995,6 +1076,57 @@
       note.title = latestActivity ? latestActivity.text : '';
     }
 
+    function renderPropertyInterests() {
+      const list = document.getElementById('propertyInterestList');
+      const notice = document.getElementById('interestStorageNotice');
+      list.replaceChildren();
+      if (propertyInterestsLoadError) {
+        notice.textContent = 'Saved property interests could not be loaded from this browser.';
+        notice.hidden = false;
+        return;
+      }
+      notice.hidden = true;
+      if (propertyInterests.length === 0) {
+        const empty = document.createElement('p');
+        empty.className = 'property-interest-empty';
+        empty.append('No buying inquiries saved yet. Browse the catalog and select a property to express interest. ');
+        const browseLink = document.createElement('a');
+        browseLink.href = 'dashboard.html';
+        browseLink.textContent = 'Browse properties';
+        empty.append(browseLink);
+        list.append(empty);
+        return;
+      }
+      propertyInterests.forEach((interest) => {
+        const row = document.createElement('article');
+        row.className = 'property-interest-row';
+        const imageUrl = propertyImages[interest.propertyId];
+        if (imageUrl) {
+          const image = document.createElement('img');
+          image.className = 'property-interest-image';
+          image.src = imageUrl;
+          image.alt = `${interest.propertyName} property`;
+          image.width = 600;
+          image.height = 400;
+          image.loading = 'lazy';
+          image.decoding = 'async';
+          row.append(image);
+        }
+        const details = document.createElement('div');
+        details.className = 'property-interest-details';
+        const title = document.createElement('strong');
+        title.textContent = interest.propertyName;
+        const meta = document.createElement('p');
+        meta.textContent = `${interest.location} · ${interest.price} · Inquiry saved ${interest.date}`;
+        details.append(title, meta);
+        const status = document.createElement('span');
+        status.className = 'property-interest-status';
+        status.textContent = interest.status;
+        row.append(details, status);
+        list.append(row);
+      });
+    }
+
     function renderSavedRequests() {
       savedRequests.slice().reverse().forEach((request) => {
         const row = document.createElement('article');
@@ -1093,6 +1225,7 @@
     }
 
     renderSavedRequests();
+    renderPropertyInterests();
     savedActivities.slice().reverse().forEach((activity) => renderActivity(activity, true));
     updateOverviewActivity();
     updatePaymentMethods();
@@ -1247,6 +1380,12 @@
         eyebrow: 'Rent and payment records',
         title: 'Payments',
         description: 'Check your upcoming rent, payment history, receipts, and saved methods.'
+      },
+      interests: {
+        label: 'My interests',
+        eyebrow: 'Your next move',
+        title: 'My property interests',
+        description: 'Review properties you saved an inquiry for and follow up with the property team.'
       },
       maintenance: {
         label: 'Maintenance',
